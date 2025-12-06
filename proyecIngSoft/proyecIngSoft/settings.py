@@ -15,7 +15,7 @@ load_dotenv(BASE_DIR / ".env")
 # ⚠️ En desarrollo: clave dummy
 SECRET_KEY = 'django-insecure-&bz2s9%z=d)^5j&kow-33z&l@$^fu7qu+qu5hl#tby28k_1=aj'
 DEBUG = True
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -31,6 +31,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -83,6 +84,8 @@ USE_TZ = True
 # Archivos estáticos
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] if (BASE_DIR / 'static').exists() else []
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media (si usas imágenes en Desafio)
 MEDIA_URL = '/media/'
